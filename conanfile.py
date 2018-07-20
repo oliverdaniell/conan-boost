@@ -188,7 +188,9 @@ class BoostConan(ConanFile):
         if self.settings.get_safe('os').lower() in ('linux', 'android'):
             flags.append('binary-format=elf')
 
-        if arch.startswith('arm'):
+        if "-mabi" in os.environ["CXXFLAGS"]:
+            self.output.info("Cross building, setting abi from CXXFLAGS")
+        elif arch.startswith('arm'):
             if 'hf' in arch:
                 flags.append('-mfloat-abi=hard')
             flags.append('abi=aapcs')
