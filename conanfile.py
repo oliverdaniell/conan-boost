@@ -182,6 +182,7 @@ class BoostConan(ConanFile):
         self.output.info("Cross building, detecting compiler...")
         arch = "arm" if arch.startswith("arm") else arch
         arch = "x86" if arch == "x86_64" else arch
+        arch = "power" if arch.startswith("ppc") else arch
         flags.append('architecture=%s' % arch)
         bits = {"x86_64": "64", "armv8": "64"}.get(str(self.settings.arch), "32")
         flags.append('address-model=%s' % bits)
